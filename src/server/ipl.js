@@ -74,11 +74,11 @@ function extraRunPerTeam(matches, deliveries, year = 2016) {
 
                 if (matches.id == element.match_id) {
 
-                    if (items[element.batting_team]) {
-                        items[element.batting_team] += Number(element.extra_runs);
+                    if (items[element.bowling_team]) {
+                        items[element.bowling_team] += Number(element.extra_runs);
                     }
                     else {
-                        items[element.batting_team] = Number(element.extra_runs);
+                        items[element.bowling_team] = Number(element.extra_runs);
                     }
                 }
             });
