@@ -92,36 +92,40 @@ function extraRunPerTeam(matches, deliveries, year = 2016) {
 }
 
 //
-function top10EconomicalBowlers2015(matches, deliveries) {
-    let matchId = 0;
-    let economy = {};
-    for (let match of matches) {
-        const season = match.season;
-        const id = match.id;
-        if (season == 2015) {
-            matchId = id;
+function top10EconomicalBowlers2015(matches, deliveries,year = 2015) {
+    var bowlerInfo = {};
+    var matchId = [];
+    matches.map((match) => {
+        if (match["season"] == year) {
+            matchId.push(match["id"])
         }
+    })
+    deliveries.map((delivery) => {
 
-        for (let delivery of deliveries) {
-            const match_id = delivery.match_id;
-            const bowler = delivery.bowler;
-            const over = delivery.over;
-            const total_runs = delivery.total_runs;
-            if (match_id == matchId) {
-                if (bowler in economy) {
-                    economy[bowler] += Number(total_runs / over);
-                } else {
-                    economy[bowler] = Number(total_runs / over);
-                }
+        if (matchId.includes(delivery["match_id"])) {
+
+            if (!bowlerInfo.hasOwnProperty(delivery["bowler"])) {
+
+                bowlerInfo[delivery["bowler"]] = { "runs": Number(delivery["total_runs"]), "balls": 1 }
+
+            }
+            else {
+                bowlerInfo[delivery["bowler"]].runs += Number(delivery["total_runs"]);
+                bowlerInfo[delivery["bowler"]].balls += 1;
             }
         }
-    }
+    })
+    var bowlerEconomy = Object.keys(bowlerInfo).reduce((acc, ele) => {
 
-    let economyInSortedOrder = Object.entries(economy).sort(
+        acc.push([ele, bowlerInfo[ele].runs / (bowlerInfo[ele].balls / 6)])
+        return acc;
+    }, [])
+    //console.log(bowlerEconomy)
+    let economyInSortedOrder = bowlerEconomy.sort(
         (a, b) => a[1] - b[1]
     );
     let result = economyInSortedOrder.slice(0, 10);
     return result;
-};
+}
 
 module.exports = { matchesPerYear, extraRunPerTeam, matchesWonPerTeam, top10EconomicalBowlers2015 }
