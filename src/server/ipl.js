@@ -2,22 +2,20 @@
 function matchesPerYear(matches) {
 
     if (typeof matches !== 'object' || matches.length === 0) {
-        return {};
+        return "either matches is not object or it is empty";
     }
     else {
 
         let yearCount = {};
-
-        matches.map(matches => {
-            let years = matches.season;
-
-            if (years in yearCount) {
+        matches.map(matches=>{
+            let years= matches.season;
+            if(!yearCount.hasOwnProperty(matches['season'])){
+                yearCount[years]=1;
+            }else{
                 yearCount[years]++;
             }
-            else {
-                yearCount[years] = 1;
-            }
-        });
+        })
+
         return yearCount;
 
     }
