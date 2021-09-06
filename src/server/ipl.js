@@ -27,7 +27,7 @@ function matchesPerYear(matches) {
 function matchesWonPerTeam(matches) {
 
     if (typeof matches !== 'object' || matches.length === 0) {
-        return {};
+        return "either matches is not object or it is empty";
     }
 
     else {
