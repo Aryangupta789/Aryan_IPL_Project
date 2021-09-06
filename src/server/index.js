@@ -6,17 +6,7 @@ const pathDeliveriesCsv = 'src/data/deliveries.csv'
 const {matchesPerYear, extraRunPerTeam, 
   matchesWonPerTeam, top10EconomicalBowlers2015}=require("./ipl");
 
-/*csv()
-.fromFile(pathDeliveriesCsv)
-.then((jsonObj)=>{
-    console.log(jsonObj);
-})
 
-csv()
-.fromFile(pathMatchesCsv)
-.then((jsonObj)=>{
-    console.log(jsonObj);
-})*/
 
 const saveOutputToJson = (data, fileName) => {
   fs.writeFile(
