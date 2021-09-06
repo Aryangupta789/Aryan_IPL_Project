@@ -8,7 +8,7 @@ function matchesPerYear(matches) {
 
         let yearCount = {};
 
-        matches.forEach(matches => {
+        matches.map(matches => {
             let years = matches.season;
 
             if (years in yearCount) {
@@ -35,7 +35,7 @@ function matchesWonPerTeam(matches) {
     else {
         let teams = {};
 
-        matches.forEach(matches => {
+        matches.map(matches => {
             let season = matches.season;
             let winner = matches.winner;
 
@@ -66,7 +66,7 @@ function extraRunPerTeam(matches, deliveries, year = 2016) {
 
     let items = {};
 
-    matches.forEach(matches => {
+    matches.map(matches => {
 
         if (matches.season == year) {
 
@@ -91,7 +91,7 @@ function extraRunPerTeam(matches, deliveries, year = 2016) {
 
 }
 
-//
+//Top 10 economical bowlers in the year 2015
 function top10EconomicalBowlers2015(matches, deliveries,year = 2015) {
     var bowlerInfo = {};
     var matchId = [];
@@ -115,6 +115,7 @@ function top10EconomicalBowlers2015(matches, deliveries,year = 2015) {
             }
         }
     })
+    //console.log(bowlerInfo);
     var bowlerEconomy = Object.keys(bowlerInfo).reduce((acc, ele) => {
 
         acc.push([ele, bowlerInfo[ele].runs / (bowlerInfo[ele].balls / 6)])
