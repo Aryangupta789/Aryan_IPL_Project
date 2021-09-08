@@ -1,19 +1,18 @@
 /*Number of matches played per year for all the years in IPL.*/
 function matchesPerYear(matches) {
   if (typeof matches !== "object" || matches.length === 0) {
-    return {};
+    return "either matches is not object or it is empty";
   } else {
     let yearCount = {};
-
-    matches.forEach((matches) => {
+    matches.map((matches) => {
       let years = matches.season;
-
-      if (years in yearCount) {
-        yearCount[years]++;
-      } else {
+      if (!yearCount.hasOwnProperty(matches["season"])) {
         yearCount[years] = 1;
+      } else {
+        yearCount[years]++;
       }
     });
+
     return yearCount;
   }
 }
@@ -22,11 +21,11 @@ function matchesPerYear(matches) {
 
 function matchesWonPerTeam(matches) {
   if (typeof matches !== "object" || matches.length === 0) {
-    return {};
+    return "either matches is not object or it is empty";
   } else {
     let teams = {};
 
-    matches.forEach((matches) => {
+    matches.map((matches) => {
       let season = matches.season;
       let winner = matches.winner;
 
@@ -50,7 +49,7 @@ function matchesWonPerTeam(matches) {
 function extraRunPerTeam(matches, deliveries, year = 2016) {
   let items = {};
 
-  matches.forEach((matches) => {
+  matches.map((matches) => {
     if (matches.season == year) {
       deliveries.forEach((element) => {
         if (matches.id == element.match_id) {
@@ -68,7 +67,6 @@ function extraRunPerTeam(matches, deliveries, year = 2016) {
 }
 
 //Top 10 economical bowlers in the year 2015
-
 function top10EconomicalBowlers2015(matches, deliveries, year = 2015) {
   var bowlerInfo = {};
   var matchId = [];
