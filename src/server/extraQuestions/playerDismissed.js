@@ -14,7 +14,7 @@ function playerDismissed(deliveries) {
     });
     result[player.batsman] = bowlerName;
   });
-  console.log(result)
+  //console.log(result)
   finalResult={}
   for(player in result){
       let max=Math.max(...Object.values(result[player]))
